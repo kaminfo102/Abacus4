@@ -114,7 +114,7 @@ const focusNextInput = (currentIndex: number) => {
                   </TableCell>
                 ))}
                 <TableCell className="text-center font-bold">
-                  {itemIndex === 0 ? 'Abacuse' : `سطر ${itemIndex + 1}`}
+                  {itemIndex =`آیتم ${itemIndex + 1}`}
                 </TableCell>
               </TableRow>
             ))}
@@ -190,7 +190,7 @@ const focusNextInput = (currentIndex: number) => {
           size="lg"
           className="bg-green-600 hover:bg-green-700 text-white px-8 py-6 text-lg"
           onClick={handleFinishExam}
-          disabled={!allAnswersSubmitted || isDisabled}
+
         >
           پایان آزمون
         </Button>
