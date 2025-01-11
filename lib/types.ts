@@ -37,3 +37,11 @@ export interface NumberItem {
 export interface ExamRow {
   items: NumberItem[];
 }
+
+export type UserRole = 'admin' | 'student';
+
+export interface User {
+  username: string;
+  password: string;
+  role: UserRole;
+}
