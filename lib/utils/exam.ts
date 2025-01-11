@@ -3,9 +3,9 @@
 import type { ExamResult, ExamRow } from "@/lib/types";
 
 export function calculateExamResult(
-  correctAnswers: number,
-  totalQuestions: number,
-  timeSpent: number
+    correctAnswers: number,
+    totalQuestions: number,
+    timeSpent: number
 ): ExamResult {
   return {
     correctAnswers,
