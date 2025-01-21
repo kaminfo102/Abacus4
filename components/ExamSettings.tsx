@@ -19,7 +19,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { withAuth } from '@/lib/withAuth';
+
 interface ExamSettingsProps {
     onStart: (settings: ExamSettings) => void;
 }
@@ -283,4 +283,3 @@ export function ExamSettings({ onStart }: ExamSettingsProps) {
       </Card>
   );
 }
-
