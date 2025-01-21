@@ -25,8 +25,26 @@ export function getRandomOperator(operators: Operator[]): Operator {
   return operators[Math.floor(Math.random() * operators.length)];
 }
 
+// export function calculateRowResult(items: NumberItem[]): number {
+//   return items.reduce((result, item, index) => {
+//     if (index === 0) return item.value;
+//
+//     switch (item.operator) {
+//       case '+':
+//         return result + item.value;
+//       case '-':
+//         return result - item.value;
+//       case '*':
+//         return result * item.value;
+//       case '/':
+//         return Math.round(result / item.value);
+//       default:
+//         return result;
+//     }
+//   }, 0);
+// }
 export function calculateRowResult(items: NumberItem[]): number {
-  return items.reduce((result, item, index) => {
+  return Math.abs(items.reduce((result, item, index) => {
     if (index === 0) return item.value;
 
     switch (item.operator) {
@@ -41,7 +59,7 @@ export function calculateRowResult(items: NumberItem[]): number {
       default:
         return result;
     }
-  }, 0);
+  }, 0));
 }
 
 export function generateExamData(settings: ExamSettings): ExamRow[] {
