@@ -17,4 +17,4 @@ export function TimeoutAlert({ onClose }: TimeoutAlertProps) {
       </AlertDescription>
     </Alert>
   );
-}
+} 

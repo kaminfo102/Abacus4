@@ -53,6 +53,10 @@ export function generateExamData(settings: ExamSettings): ExamRow[] {
   }));
 }
 
+export function generateExamId(): string {
+  return `exam_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+}
+
 export const OPERATOR_LABELS: Record<Operator, string> = {
   '+': 'جمع',
   '-': 'تفریق',

@@ -9,6 +9,7 @@ interface ExamState {
   addExam: (exam: Exam) => void;
   addResult: (examId: string, result: ExamResult) => void;
   getExamsByTerm: (term: string) => Exam[];
+  deleteExam: (examId: string) => void;
 }
 
 export const useExamStore = create<ExamState>((set, get) => ({
@@ -21,4 +22,11 @@ export const useExamStore = create<ExamState>((set, get) => ({
     })),
   getExamsByTerm: (term) => 
     get().exams.filter(exam => exam.term === term),
+  deleteExam: (examId) => 
+    set((state) => ({ 
+      exams: state.exams.filter(exam => exam.id !== examId),
+      results: Object.fromEntries(
+        Object.entries(state.results).filter(([id]) => id !== examId)
+      )
+    })),
 }));

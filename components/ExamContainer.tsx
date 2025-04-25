@@ -5,7 +5,7 @@ import { Card } from "@/components/ui/card";
 import { ExamTimer } from "./ExamTimer";
 import { ExamSettings } from "./ExamSettings";
 import { ExamResult } from "./ExamResult";
-import { TimeoutAlert } from "./TimeoutAlert";
+import { TimeoutAlert } from "./exam/TimeoutAlert";
 import { CalculationsTable } from "./CalculationsTable";
 import type { ExamSettings as ExamSettingsType, ExamResult as ExamResultType } from "@/lib/types";
 import { generateExamData } from "@/lib/utils";

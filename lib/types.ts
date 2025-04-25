@@ -22,6 +22,15 @@ export interface ExamSettings {
   itemsPerRow: number;
 }
 
+export interface Exam {
+  id: string;
+  title: string;
+  term: string;
+  settings: ExamSettings;
+  createdAt: string;
+  updatedAt: string;
+}
+
 /*export interface ExamResult {
   correctAnswers: number;
   totalQuestions: number;
