@@ -1,19 +1,19 @@
-"use client";
+import { ExamPageClient } from "./ExamPageClient";
 
-import { useEffect } from "react";
-import { useParams } from "next/navigation";
-import { ExamPage } from "@/components/exam/ExamPage";
-import { useExamStore } from "@/lib/store";
+interface PageProps {
+  params: Promise<{ id: string }>;
+}
 
-export default function ExamPageRoute() {
-  const { id } = useParams();
-  const exam = useExamStore(state => 
-    state.exams.find(e => e.id === id)
-  );
+export default async function ExamPageRoute({ params }: PageProps) {
+  const { id } = await params;
+  return <ExamPageClient id={id} />;
+}
 
-  if (!exam) {
-    return <div>آزمون یافت نشد</div>;
-  }
-
-  return <ExamPage exam={exam} />;
+export async function generateStaticParams() {
+  // For static export, we'll generate paths for a few example exam IDs
+  return [
+    { id: 'exam_1' },
+    { id: 'exam_2' },
+    { id: 'exam_3' }
+  ];
 }

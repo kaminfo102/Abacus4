@@ -46,3 +46,13 @@ export interface NumberItem {
 export interface ExamRow {
   items: NumberItem[];
 }
+
+export interface User {
+  id: string;
+  username: string;
+  name: string;
+  email: string;
+  term: string;
+  avatar: string;
+  role: 'admin' | 'user';
+}

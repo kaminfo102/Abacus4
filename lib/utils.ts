@@ -63,3 +63,7 @@ export const OPERATOR_LABELS: Record<Operator, string> = {
   '*': 'ضرب',
   '/': 'تقسیم'
 };
+
+export function formatDate(dateString: string): string {
+  return new Date(dateString).toLocaleDateString();
+}

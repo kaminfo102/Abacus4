@@ -21,8 +21,10 @@ export const useAuth = create<AuthState>((set) => ({
       id: '1',
       name: email === 'admin@example.com' ? 'ادمین' : 'کاربر نمونه',
       email,
-      term: '3',
-      avatar: `https://api.dicebear.com/7.x/avataaars/svg?seed=${email}`,
+      term: '1',
+      avatar: '/avatars/default.png',
+      username: email.split('@')[0],
+      role: email === 'admin@example.com' ? 'admin' : 'user'
     };
     set({ user: mockUser, isAdmin: email === 'admin@example.com' });
   },

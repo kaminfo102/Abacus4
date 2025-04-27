@@ -35,9 +35,9 @@ const OPERATORS: { value: Operator; label: string }[] = [
 
 export function ExamForm({ onSubmit }: ExamFormProps) {
   const addExam = useExamStore((state) => state.addExam);
+  const [title, setTitle] = useState("");
+  const [term, setTerm] = useState("1");
   const [settings, setSettings] = useState<ExamSettings>({
-    title: "",
-    term: "1",
     digitCount: 1,
     rowCount: 10,
     timeLimit: 60,
@@ -50,10 +50,11 @@ export function ExamForm({ onSubmit }: ExamFormProps) {
     
     const exam = {
       id: generateExamId(),
-      title: settings.title,
-      term: settings.term,
+      title,
+      term,
       settings,
-      createdAt: new Date().toISOString()
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
     };
     
     addExam(exam);
@@ -75,8 +76,8 @@ export function ExamForm({ onSubmit }: ExamFormProps) {
         <Label htmlFor="title">عنوان آزمون</Label>
         <Input
           id="title"
-          value={settings.title}
-          onChange={(e) => setSettings(prev => ({ ...prev, title: e.target.value }))}
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
           required
           placeholder="مثال: آزمون پایان ترم محاسبات ذهنی"
         />
@@ -85,15 +86,15 @@ export function ExamForm({ onSubmit }: ExamFormProps) {
       <div className="space-y-2">
         <Label htmlFor="term">ترم</Label>
         <Select
-          value={settings.term}
-          onValueChange={(value) => setSettings(prev => ({ ...prev, term: value }))}>
+          value={term}
+          onValueChange={setTerm}>
           <SelectTrigger className="w-full">
             <SelectValue placeholder="انتخاب ترم" />
           </SelectTrigger>
           <SelectContent>
-            {TERMS.map((term) => (
-              <SelectItem key={term.value} value={term.value}>
-                {term.label}
+            {TERMS.map((t) => (
+              <SelectItem key={t.value} value={t.value}>
+                {t.label}
               </SelectItem>
             ))}
           </SelectContent>

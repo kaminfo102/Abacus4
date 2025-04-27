@@ -8,7 +8,7 @@ import { CheckCircle, XCircle } from "lucide-react";
 import { calculateRowResult, convertPersianToEnglish, cn } from "@/lib/utils";
 import type { ExamRow } from "@/lib/types";
 
-type Answer = {
+export type Answer = {
   value: string;
   submitted: boolean;
   isCorrect?: boolean;
@@ -32,15 +32,17 @@ export function CalculationsTable({ examData, onFinish, isDisabled, onAnswersUpd
 // فوکوس ورودی
 useEffect(() => {
   const lastInputIndex = examData.length - 1;
-  if (inputRefs.current[lastInputIndex]) {
-    inputRefs.current[lastInputIndex].focus();
+  const lastInput = inputRefs.current[lastInputIndex];
+  if (lastInput) {
+    lastInput.focus();
   }
 }, [examData.length]);
 
 const focusNextInput = (currentIndex: number) => {
   const nextIndex = currentIndex - 1; // حرکت به سمت راست
-  if (nextIndex >= 0 && inputRefs.current[nextIndex]) {
-    inputRefs.current[nextIndex].focus();
+  const nextInput = inputRefs.current[nextIndex];
+  if (nextIndex >= 0 && nextInput) {
+    nextInput.focus();
   }
 };
 
@@ -114,7 +116,7 @@ const focusNextInput = (currentIndex: number) => {
                   </TableCell>
                 ))}
                 <TableCell className="text-center font-bold">
-                  {itemIndex =`آیتم ${itemIndex + 1}`}
+                  {`آیتم ${itemIndex + 1}`}
                 </TableCell>
               </TableRow>
             ))}

@@ -1,6 +1,7 @@
 "use client";
 
 import type { ExamResult, ExamRow } from "@/lib/types";
+import { generateExamId } from "@/lib/utils";
 
 export function calculateExamResult(
     correctAnswers: number,
@@ -8,10 +9,12 @@ export function calculateExamResult(
     timeSpent: number
 ): ExamResult {
   return {
+    examId: generateExamId(),
     correctAnswers,
     totalQuestions,
     timeSpent,
-    percentage: Math.round((correctAnswers / totalQuestions) * 100)
+    percentage: Math.round((correctAnswers / totalQuestions) * 100),
+    submittedAt: new Date().toISOString()
   };
 }
 

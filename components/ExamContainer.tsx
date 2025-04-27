@@ -6,9 +6,9 @@ import { ExamTimer } from "./ExamTimer";
 import { ExamSettings } from "./ExamSettings";
 import { ExamResult } from "./ExamResult";
 import { TimeoutAlert } from "./exam/TimeoutAlert";
-import { CalculationsTable } from "./CalculationsTable";
+import { CalculationsTable, type Answer } from "@/components/CalculationsTable";
 import type { ExamSettings as ExamSettingsType, ExamResult as ExamResultType } from "@/lib/types";
-import { generateExamData } from "@/lib/utils";
+import { generateExamData, generateExamId } from "@/lib/utils";
 
 export function ExamContainer() {
   const [isStarted, setIsStarted] = useState(false);
@@ -32,10 +32,12 @@ export function ExamContainer() {
     const percentage = Math.round((correctAnswers / settings!.rowCount) * 100);
     
     return {
+      examId: generateExamId(),
       correctAnswers,
       totalQuestions: settings!.rowCount,
       timeSpent: examTime,
-      percentage
+      percentage,
+      submittedAt: new Date().toISOString()
     };
   }, [settings, examTime]);
 

@@ -29,10 +29,12 @@ export function ExamPage({ exam }: ExamPageProps) {
 
   const handleFinish = useCallback((correctAnswers: number) => {
     const result = {
+      examId: exam.id,
       correctAnswers,
       totalQuestions: exam.settings.rowCount,
       timeSpent,
-      percentage: Math.round((correctAnswers / exam.settings.rowCount) * 100)
+      percentage: Math.round((correctAnswers / exam.settings.rowCount) * 100),
+      submittedAt: new Date().toISOString()
     };
 
     addResult(exam.id, result);
