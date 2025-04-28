@@ -3,10 +3,10 @@
 import { useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { Card } from "@/components/ui/card";
-import { ExamTimer } from "@/components/exam--/ExamTimer";
-import { ExamContent } from "@/components/exam--/ExamContent";
-import { ExamResult } from "@/components/exam--/ExamResult";
-import { TimeoutAlert } from "@/components/exam--/TimeoutAlert";
+import { ExamTimer } from "@/components/exam-/ExamTimer";
+import { ExamContent } from "@/components/exam-/ExamContent";
+import { ExamResult } from "@/components/exam-/ExamResult";
+import { TimeoutAlert } from "@/components/exam-/TimeoutAlert";
 import { useExamStore } from "@/lib/store";
 import type { Exam } from "@/lib/types";
 

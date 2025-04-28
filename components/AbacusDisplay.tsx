@@ -1,7 +1,8 @@
 "use client";
 
+import { Abacus } from '@/lib/abacusReact';
 import { useEffect, useRef } from 'react';
-import { Abacus } from '@/lib/abacus';
+// import { Abacus } from '@/lib/abacus';
 
 export default function AbacusDisplay() {
   const abacusRef = useRef<Abacus | null>(null);
