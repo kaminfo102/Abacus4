@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { CheckCircle, XCircle } from "lucide-react";
 import { calculateRowResult, convertPersianToEnglish, cn } from "@/lib/utils";
 import type { ExamRow } from "@/lib/types";
-
+import { AbacusComponent } from "./Abacus";
 export type Answer = {
   value: string;
   submitted: boolean;
@@ -83,6 +83,7 @@ const focusNextInput = (currentIndex: number) => {
 
   return (
     <div className="space-y-6">
+      <AbacusComponent />
       <div className="overflow-x-auto">
         <Table>
           <TableHeader>

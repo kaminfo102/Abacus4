@@ -1,19 +1,9 @@
-import { ExamPageClient } from "./ExamPageClient";
+import { AbacusComponent } from "@/components/Abacus";
 
-interface PageProps {
-  params: Promise<{ id: string }>;
-}
-
-export default async function ExamPageRoute({ params }: PageProps) {
-  const { id } = await params;
-  return <ExamPageClient id={id} />;
-}
-
-export async function generateStaticParams() {
-  // For static export, we'll generate paths for a few example exam IDs
-  return [
-    { id: 'exam_1' },
-    { id: 'exam_2' },
-    { id: 'exam_3' }
-  ];
-}
+<div className="flex flex-col gap-4">
+  <AbacusComponent onNumberChange={(number) => {
+    // اینجا می‌توانید با عدد چرتکه کار کنید
+    console.log("Abacus number:", number);
+  }} />
+  <ExamPageClient id={params.id} />
+</div> 
