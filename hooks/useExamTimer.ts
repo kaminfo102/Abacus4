@@ -22,22 +22,26 @@ export function useExamTimer({ isRunning, onTimeUpdate, timeLimit, onTimeEnd }: 
   // Handle the timer increment
   useEffect(() => {
     let interval: NodeJS.Timeout;
-    
     if (isRunning) {
       interval = setInterval(() => {
         setSeconds((prev) => {
           const newTime = prev + 1;
           if (timeLimit && newTime >= timeLimit) {
-            onTimeEnd?.();
             return timeLimit;
           }
           return newTime;
         });
       }, 1000);
     }
-
     return () => clearInterval(interval);
-  }, [isRunning, timeLimit, onTimeEnd]);
+  }, [isRunning, timeLimit]);
+
+  // فراخوانی onTimeEnd فقط بعد از آپدیت state
+  useEffect(() => {
+    if (timeLimit && seconds >= timeLimit) {
+      onTimeEnd?.();
+    }
+  }, [seconds, timeLimit, onTimeEnd]);
 
   const formattedTime = useCallback((totalSeconds: number) => {
     const minutes = Math.floor(totalSeconds / 60);

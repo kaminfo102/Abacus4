@@ -23,24 +23,21 @@ export function AbacusComponent({ onNumberChange }: AbacusProps) {
     abacusContainerRef.current.appendChild(canvas);
 
     function calculateDimensions() {
-      const containerWidth = abacusContainerRef.current?.clientWidth || 0;
+      const containerWidth = abacusContainerRef.current?.clientWidth || window.innerWidth;
       const isMobile = window.innerWidth < 768;
-      
       const width = isMobile 
         ? Math.min(containerWidth, 500)
         : Math.min(Math.max(containerWidth, 300), 800);
-      
-      const height = Math.round(width * 0.5);
-      
+      const height = Math.max(Math.round(width * 0.65), 220);
       return { width, height, isMobile };
     }
 
     const { width, height, isMobile } = calculateDimensions();
     canvas.width = width;
     canvas.height = height;
-    canvas.style.width = '100%';
-    canvas.style.maxWidth = isMobile ? '500px' : '800px';
-    canvas.style.minWidth = '300px';
+    canvas.style.width = `${width}px`;
+    canvas.style.minWidth = `${width}px`;
+    canvas.style.maxWidth = 'unset';
     canvas.style.height = 'auto';
     canvas.style.display = 'block';
     canvas.style.margin = '0 auto';
@@ -136,10 +133,12 @@ export function AbacusComponent({ onNumberChange }: AbacusProps) {
         ref={abacusContainerRef}
         className="flex flex-col justify-center items-center w-full"
         style={{ 
-          minHeight: 180, 
-          width: '100%', 
+          minHeight: 220,
+          width: '100%',
           overflowX: 'auto',
-          padding: '0 1rem'
+          overflowY: 'hidden',
+          padding: '0 1rem',
+          WebkitOverflowScrolling: 'touch'
         }}
       ></div>
       <div className="flex justify-center mt-4">
