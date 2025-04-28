@@ -22,14 +22,25 @@ export function AbacusComponent({ onNumberChange }: AbacusProps) {
     canvas.id = 'abacus-canvas';
     abacusContainerRef.current.appendChild(canvas);
 
-    const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
-    const isMobile = vw < 600;
-    const width = isMobile ? vw : Math.min(vw * 0.98, 800);
-    const height = Math.round(width * 0.5);
+    function calculateDimensions() {
+      const containerWidth = abacusContainerRef.current?.clientWidth || 0;
+      const isMobile = window.innerWidth < 768;
+      
+      const width = isMobile 
+        ? Math.min(containerWidth, 500)
+        : Math.min(Math.max(containerWidth, 300), 800);
+      
+      const height = Math.round(width * 0.5);
+      
+      return { width, height, isMobile };
+    }
+
+    const { width, height, isMobile } = calculateDimensions();
     canvas.width = width;
     canvas.height = height;
-    canvas.style.width = isMobile ? '100vw' : '100%';
-    canvas.style.maxWidth = isMobile ? '100vw' : '800px';
+    canvas.style.width = '100%';
+    canvas.style.maxWidth = isMobile ? '500px' : '800px';
+    canvas.style.minWidth = '300px';
     canvas.style.height = 'auto';
     canvas.style.display = 'block';
     canvas.style.margin = '0 auto';
@@ -39,18 +50,17 @@ export function AbacusComponent({ onNumberChange }: AbacusProps) {
     abacus.setCanvas(canvas);
 
     function resizeCanvas() {
-      const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
-      const isMobile = vw < 600;
-      const width = isMobile ? vw : Math.min(vw * 0.98, 800);
-      const height = Math.round(width * 0.5);
-      canvas.width = width;
-      canvas.height = height;
-      canvas.style.width = isMobile ? '100vw' : '100%';
-      canvas.style.maxWidth = isMobile ? '100vw' : '800px';
-      canvas.style.height = 'auto';
-      if (abacusInstanceRef.current) {
-        abacusInstanceRef.current.setCanvas(canvas);
-        abacusInstanceRef.current.draw();
+      const { width, height, isMobile } = calculateDimensions();
+      
+      if (canvas.width !== width || canvas.height !== height) {
+        canvas.width = width;
+        canvas.height = height;
+        canvas.style.maxWidth = isMobile ? '500px' : '800px';
+        
+        if (abacusInstanceRef.current) {
+          abacusInstanceRef.current.setCanvas(canvas);
+          abacusInstanceRef.current.draw();
+        }
       }
     }
 
@@ -125,7 +135,12 @@ export function AbacusComponent({ onNumberChange }: AbacusProps) {
       <div
         ref={abacusContainerRef}
         className="flex flex-col justify-center items-center w-full"
-        style={{ minHeight: 180, width: '100%', overflowX: 'auto' }}
+        style={{ 
+          minHeight: 180, 
+          width: '100%', 
+          overflowX: 'auto',
+          padding: '0 1rem'
+        }}
       ></div>
       <div className="flex justify-center mt-4">
         <Button onClick={handleReset} variant="outline">پاک کردن</Button>
